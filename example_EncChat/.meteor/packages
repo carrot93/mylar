@@ -7,8 +7,8 @@ meteor-platform
 bootstrap
 accounts-password
 accounts-base
-accounts-idp
+mylar:accounts-idp
 
 # Mylar
-principal
 #search
+shjiaye:platform

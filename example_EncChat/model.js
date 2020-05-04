@@ -1,6 +1,7 @@
 ////////// Shared code (client and server) //////////
 
 Rooms = new Meteor.Collection('rooms');
+// Mongo.Collection.intercept.init(Rooms);
 /*  roomTitle
  peopleID
  peopleUsername: creator username
@@ -8,6 +9,7 @@ Rooms = new Meteor.Collection('rooms');
  createdByID: user id creator
  */
 Messages = new Meteor.Collection('messages');
+Mongo.Collection.intercept.init(Messages);
 /* rID: room id,
  roomprinc
  message,
@@ -26,10 +28,10 @@ Messages._encrypted_fields({
     'message': {
         princ: 'roomprinc',
         princtype: 'room',
-        auth: ['_id']
+        auth: ['timestamp','_id','message']
     }
 });
-Messages._immutable({roomprinc: ['rID', 'roomTitle', '_id']});
+Messages._immutable({roomprinc:['rID', 'roomTitle', '_id']});
 
 
 // important for the IDP, so it get the _wrapped_pk fields of the user doc

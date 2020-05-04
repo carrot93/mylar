@@ -1,4 +1,7 @@
-# Mylar - ported to Meteor v1.1
+# Mylar - ported to Meteor v1.2+
+
+make the toy run again.
+
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/strikeout/mylar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## About

@@ -6,6 +6,7 @@ function roomprinc(cb) {
     var u = Meteor.user();
     if (u && u.Room && u.Room.inRoom) {
         room = u.Room;
+        console.log('room item:',room.inRoomTitle,room.inRoomCreator);
         Principal.lookup([new PrincAttr("room", room.inRoomTitle)], room.inRoomCreator,
             function (room_princ) {
                 cb(room_princ);
@@ -170,6 +171,7 @@ Template.room.events({
         Rooms.update({_id: roomID}, {$push: {invitedID: inviteeID }});
 
         roomprinc(function (room_princ) {
+            console.log('invite room_princ',room_princ);
             Principal.lookupUser(invitee, function (princ) {
                 Principal.add_access(princ, room_princ, function () {
                     $("#invite_user").val("");
@@ -186,14 +188,16 @@ Template.room.events({
         var title = $("#roomtitle").text();
         var creator = $("#roomcreator").text();
         roomprinc(function (room_princ) {
+            console.log('sendM room_princ:',room_princ);
             Messages.insert({
                 rID: Meteor.user().Room.inRoomID,
-                roomprinc: room_princ._id,
+                // princ: room_princ._id,
+                roomprinc: room_princ.id,
                 roomTitle: title,
                 message: msg,
                 userID: Meteor.userId(),
                 username: Meteor.user().username,
-                time: getFormattedDate()
+                timestamp: getFormattedDate()
             });
             $("#messageTextArea").val('');
         });
@@ -211,14 +215,16 @@ Template.room.events({
                 var title = $("#roomtitle").text();
                 var creator = $("#roomcreator").text();//why do we need room creator here?
                 roomprinc(function (room_princ) {
+                    console.log('textArea room_princ:',room_princ);
                     Messages.insert({
                         rID: Meteor.user().Room.inRoomID,
-                        roomprinc: room_princ._id,
+                        // princ: room_princ._id,
+                        roomprinc: room_princ.id,
                         roomTitle: title,
                         message: msg,
                         userID: Meteor.userId(),
                         username: Meteor.user().username,
-                        time: getFormattedDate()
+                        timestamp: getFormattedDate()
                     });
                     $("#messageTextArea").val('');
                 });

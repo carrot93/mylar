@@ -1,8 +1,11 @@
 ////////// Server only logic //////////
+var debug = false;
+
 Meteor.publish("rooms", function(){
     return Rooms.find({$or : [{invitedID : this.userId}, {createdByID: this.userId}] });
 });
 Meteor.publish("messages", function(roomID){
+    if (debug) console.log('roomID',roomID);
     return Messages.find({rID: roomID});
 });
 

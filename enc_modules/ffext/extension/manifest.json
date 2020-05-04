@@ -1,0 +1,23 @@
+{
+
+  "description": "mylar plugin test for firefox",
+  "manifest_version": 2,
+  "name": "mylar",
+  "version": "1.0",
+  "homepage_url": "https://github.com/carrot93/mylar",
+  "icons": {
+    "48": "content/icons/safe.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*"],
+      "js": ["content/sha1.js","content/parseUri.js","content/sjcl.js"]
+    }
+  ],
+
+  "background": {
+      "scripts": ["components/mylar_service.js"]
+  }
+
+}
